@@ -1,5 +1,5 @@
 - 👋 Hi, I’m @devdoode
-- 👀 I’m interested in building projects that have the potential to make world a better place.
+- 👀 I’m interested in building projects that can make our world a better place.
 - 🌱 I’m currently learning blockchain and building teams
 - 💞️ I’m looking to collaborate on blockchain projects
 - 📫 How to reach me devdoode101@gmail.com
