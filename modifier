@@ -1,0 +1,77 @@
+//to reduce the code, create modifiers for reusable code. it is a type of fucntion, added to other functions in the header;
+syntax:
+modifier onlyOwner{
+require(msg.sender == owner)
+
+}
+
+
+-----
+
+pragma solidity 0.8.1;
+
+contract degen {
+
+mapping (address => uint) balance;
+
+
+address owner;
+
+constructor() {
+    
+    owner = msg.sender;
+}
+
+
+//modifier
+modifier onlyOwner {
+    require(msg.sender == owner);
+    _; // run the function
+    
+}
+
+
+modifier costs(uint price) {//modifier with arguments
+
+require(msg.value >= price);
+_;
+
+}
+
+function addBalance(uint _toAdd) public onlyOwner returns(uint) {
+    
+    //require(msg.sender == owner);
+    balance[msg.sender] = balance[msg.sender] + _toAdd; // balance[msg.sender] += _toAdd
+    return balance[msg.sender];
+
+}
+
+function getBalance() public view returns(address, uint) {
+
+ return (msg.sender,balance[msg.sender]);  
+}
+
+
+function transferFunds(address recipient, uint amount) public {
+    //adding checks whether minimum balance is there with sender
+    require(balance[msg.sender] >= amount, "Balance not suffcient!");
+    require(msg.sender != recipient);
+    
+    uint senderBalancebefore = balance[msg.sender];
+    
+    _transfer(msg.sender, recipient, amount);
+    
+    assert(balance[msg.sender] == senderBalancebefore - amount);
+    
+    
+    
+    //generate event logs and further checks;
+}   
+function _transfer(address from, address to, uint value) private {
+
+    balance[from] -= value;
+    balance[to] += value;
+}
+
+
+}
